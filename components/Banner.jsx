@@ -7,7 +7,7 @@ const Banner = () => {
             objectFit='cover' />
             <div className='absolute top-1/2 text-center w-full font-medium'>
                 <p className='text-sm sm:text-lg'>Not sure where to go? perfect</p>
-                <button className='shadow-md font-medium mt-3 bg-white py-3 px-8 text-purple-500 rounded-full hover:shadow-lg active:scale-90 transition duration-150'>I&#39;m Flexible</button>
+                <button className='shadow-md font-bold mt-3 bg-white py-4 px-10 text-purple-500 rounded-full hover:shadow-lg active:scale-90 transition duration-150 text-lg'>I&#39;m flexible</button>
             </div>
         </div>
     );

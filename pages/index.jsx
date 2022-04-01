@@ -1,30 +1,63 @@
-import Banner from '../components/Banner';
-import Header from '../components/Header';
-function index({ exploreData }) {
-  return(
+import Banner from "../components/Banner";
+import Footer from "../components/Footer";
+import Header from "../components/Header";
+import LargeCard from "../components/LargeCard";
+import MediumCard from "../components/MediumCard";
+import SmallCard from "../components/SmallCard";
+function index({ exploreData, cardsData }) {
+  console.log(cardsData);
+  return (
     <div>
       <Header />
       <Banner />
-      <main>
-        <section className='pt-4'>
-          <h1 className='text-3xl font-medium px-8 mb-3 mb:px-16'>Looking for a house? perfect</h1>
-          {exploreData.map(item => (
-            <div key={item.location}>
-              <h2>{item.location}</h2>
-              <p>{item.distance}</p>
-            </div>
-          ))}
+      <main className="max-w-4xl mx-auto mb:px-16 px-8">
+        <section className="pt-6">
+          <h2 className="text-3xl font-medium pb-5">Explore Nearby</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {exploreData.map(({ img, location, distance }) => (
+              <SmallCard
+                key={location}
+                img={img}
+                distance={distance}
+                location={location}
+              />
+            ))}
+          </div>
         </section>
+
+        <section className="pt-6">
+          <h2 className="text-3xl font-medium pb-5">Live Anywhere</h2>
+          <div className="flex overflow-scroll scrollbar-hide">
+            {cardsData.map(({img, title}) => (
+              <MediumCard 
+              key={title}
+              img={img}
+              title={title}
+              />
+            ))}
+          </div>
+        </section>
+
+        <LargeCard 
+          img="https://links.papareact.com/4cj"
+          title="The Greatest Outdoors"
+          description="Wishlists created by airbnb"
+          buttonText="Get Inspired"
+        />
       </main>
+      <Footer />
     </div>
-    );
+  );
 }
 export default index;
 export async function getStaticProps() {
-  const exploreData = await fetch(
-    `https://links.papareact.com/pyp`
-  ).then((res) => res.json());
+  const exploreData = await fetch(`https://links.papareact.com/pyp`).then(
+    (res) => res.json()
+  );
+  const cardsData = await fetch(`https://links.papareact.com/zp1`).then((res) =>
+    res.json()
+  );
   return {
-    props: { exploreData },
+    props: { exploreData, cardsData },
   };
 }
